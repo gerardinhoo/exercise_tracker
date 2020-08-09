@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from "axios";
 
 
 const CreateUsers = () => {
@@ -10,8 +11,14 @@ const CreateUsers = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     const user = {username};
+
     console.log(user);
+
+    axios.post('http://localhost:5000/users/add', user)
+      .then(res => console.log(res.data));
+
     setUsername("");
   }
 
@@ -27,8 +34,7 @@ const CreateUsers = () => {
             className="form-control" 
             value={username} 
             onChange={onChangeUsername}
-          />
-          
+          />        
         </div>
 
         <div className="form-group">
