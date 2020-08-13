@@ -12,20 +12,15 @@ const EditExercises = (props) => {
 
   const userInput = useRef(null);
   
-  
-  
 
   useEffect(() => {
-  
     axios.get(`http://localhost:5000/exercises/${props.match.params.id}`)
-    .then(response => {
-      setUsername(response.data.username)
-      setDescription(response.data.description)
-      setDuration(response.data.duration)
-      setDate(new Date(response.data.date))
-    })
-
-
+      .then(response => {
+        setUsername(response.data.username)
+        setDescription(response.data.description)
+        setDuration(response.data.duration)
+        setDate(new Date(response.data.date))
+      })
     axios.get("http://localhost:5000/users/")
       .then(response => {
         if(response.data.length > 0) {
