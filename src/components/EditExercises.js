@@ -14,7 +14,7 @@ const EditExercises = (props) => {
   
   
   
-  
+
   useEffect(() => {
   
     axios.get(`http://localhost:5000/exercises/${props.match.params.id}`)
@@ -22,7 +22,7 @@ const EditExercises = (props) => {
       setUsername(response.data.username)
       setDescription(response.data.description)
       setDuration(response.data.duration)
-      setDate(response.data.date)
+      setDate(new Date(response.data.date))
     })
 
 
@@ -32,7 +32,7 @@ const EditExercises = (props) => {
           setUsers(response.data.map(user => user.username))
         }
       })
-  }, [])
+  }, [props.match.params.id])
 
   const onChangeUsername = (e) => {
     setUsername(e.target.value)
@@ -56,8 +56,8 @@ const EditExercises = (props) => {
 
     console.log(exercise);
 
-    axios.post(`http://localhost:5000/exercises/update${props.match.params.id}`, exercise)
-      .then(res => console.log(res.data));
+    axios.post(`http://localhost:5000/exercises/update/${props.match.params.id}`, exercise)
+    .then(res => console.log(res.data));
 
     window.location = "/";
   }
